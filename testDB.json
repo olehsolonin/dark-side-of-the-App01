@@ -1,0 +1,42 @@
+[
+	{
+		"name": "Abel Gibson-Jakubowski",
+		"dailyWaterIntake": 1500,
+		"email": "abel@gmail.com",
+		"gender": "male",
+		"password": 11223344,
+		"weight": 82,
+		"activity": 3
+
+},
+{
+	"name": "Orville Bashirian",
+	"dailyWaterIntake": 1800,
+	"email": "orville@gmail.com",
+	"gender": "male",
+	"password": 11223344,
+	"weight": 100,
+	"activity": 2
+
+},
+{
+	"name": "Randolph Jakubowski",
+	"dailyWaterIntake": 1400,
+	"email": "randolph@gmail.com",
+	"gender": "male",
+	"password": 11223344,
+	"weight": 92,
+	"activity": 4
+
+},
+{
+	"name": "Yvonne Weissnat",
+	"dailyWaterIntake": 1500,
+	"email": "yvonne@gmail.com",
+	"gender": "female'",
+	"password": 11223344,
+	"weight": 60,
+	"activity": 5
+
+}
+]
