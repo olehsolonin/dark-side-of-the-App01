@@ -1,6 +1,6 @@
 // src/services/students.js 
 import { Types } from 'mongoose';
-import { UsersCollection } from '../db/models/student.js';
+import { UsersCollection } from '../db/models/users.js';
 
 export const getAllUsers = async () => {
 	const users = await UsersCollection.find();
