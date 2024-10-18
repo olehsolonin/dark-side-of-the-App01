@@ -10,28 +10,28 @@ import { updateUserSchema } from '../validation/user.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { authenticate } from '../middlewares/authenticate.js';
 
-const router = Router();
+const userRouter = Router();
 
-router.use('/', authenticate);
+// userRouter.use('/', authenticate);
 
 // Отримати інформацію про користувача
-router.get('/userID', authenticate, ctrlWrapper(getUserInfoController));
+userRouter.get('/:userID', authenticate, ctrlWrapper(getUserInfoController));
 
 // Додати/змінити фото користувача
-router.post(
-  '/userID/photo',
+userRouter.post(
+  '/:userID/photo',
   authenticate,
   upload.single('photo'),
   ctrlWrapper(addUserPhotoController),
 );
 
 // Оновити інформацію про користувача
-router.patch(
-  '/userID',
+userRouter.patch(
+  '/:userID',
   authenticate,
   jsonParser,
   validateBody(updateUserSchema),
   ctrlWrapper(patchUserController),
 );
 
-export default router;
+export default userRouter;
