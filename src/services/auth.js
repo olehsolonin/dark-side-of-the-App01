@@ -4,18 +4,18 @@ import { randomBytes } from "crypto";
 import { accessTokenLifetime, refreshTokenLifetime } from "../constants/users.js";
 
 import SessionCollection from "../db/models/session.js";
-import authUserModel from "../db/models/auth-user.js";
+import UsersCollection from "../db/models/users.js";
 
 export const signup = async (payload) => {
 	const { email, password } = payload;
-	const user = await authUserModel.findOne({ email });
+	const user = await UsersCollection.findOne({ email });
 	if (user) {
 		throw createHttpError(409, "Email already exist");
 	}
 
 	const hashPassword = await bcrypt.hash(password, 10);
 
-	const data = await authUserModel.create({ ...payload, password: hashPassword });
+	const data = await UsersCollection.create({ ...payload, password: hashPassword });
 	delete data._doc.password;
 
 	return data._doc;
@@ -23,7 +23,7 @@ export const signup = async (payload) => {
 
 export const signin = async (payload) => {
 	const { email, password } = payload;
-	const user = await authUserModel.findOne({ email });
+	const user = await UsersCollection.findOne({ email });
 	if (!user) {
 		throw createHttpError(401, "Email or password invalid");
 	}

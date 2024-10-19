@@ -1,12 +1,13 @@
 // src/db/models/student.js 
 
 import { model, Schema } from 'mongoose';
+import { handleSaveError, setUpdateOptions } from "./hooks.js";
 
 const usersSchema = new Schema(
 	{
 		name: {
 			type: String,
-			required: true,
+			required: false,
 			default: 'user'
 		},
 		dailyWaterIntake: {
@@ -49,6 +50,12 @@ const usersSchema = new Schema(
 		versionKey: false,
 	},
 );
+
+usersSchema.post("save", handleSaveError);
+
+usersSchema.pre("findOneAndUpdate", setUpdateOptions);
+
+usersSchema.post("findOneAndUpdate", handleSaveError);
 
 export const UsersCollection = model('user', usersSchema);
 
