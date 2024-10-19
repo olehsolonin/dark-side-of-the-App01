@@ -6,6 +6,8 @@ import cors from 'cors';
 import { env } from './utils/env.js';
 import { UPLOAD_DIR } from './constants/index.js';
 import authRouter from './routers/auth.js';
+import waterRouter from './routers/water.js';
+import userRouter from './routers/users.js';
 
 const PORT = Number(env('PORT', '3000'));
 
@@ -23,6 +25,8 @@ export const startServer = () => {
 	// 	}),
 	// );
 	app.use('/auth', authRouter);
+	app.use('/user', userRouter);
+	app.use('/water', waterRouter);
 
 	app.use('/uploads', express.static(UPLOAD_DIR));
 
