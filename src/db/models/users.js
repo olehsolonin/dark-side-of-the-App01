@@ -10,15 +10,15 @@ const usersSchema = new Schema(
 			required: false,
 			default: 'user'
 		},
-		dailyWaterIntake: {
+		dailyNorm: {
 			type: Number,
 			required: false,
 			default: 1800
 		},
 		gender: {
 			type: String,
-			enum: ['male', 'female', ''],
-			default: 'female',
+			enum: ['Man', 'Woman', 'transformer'],
+			default: 'Woman',
 			required: false
 		},
 		email: {
@@ -26,11 +26,6 @@ const usersSchema = new Schema(
 			match: [/\S+@\S+\.\S+/, 'Please enter a valid email'],
 			unique: true,
 			required: true,
-		},
-		_id: {
-			type: Schema.Types.ObjectId,
-			ref: "users",
-			required: false,
 		},
 		password: {
 			type: String,
@@ -40,14 +35,6 @@ const usersSchema = new Schema(
 			type: String,
 			required: false,
 			default: ''
-		},
-		weight: {
-			type: Number,
-			required: false,
-		},
-		activity: {
-			type: Number,
-			required: false,
 		}
 	},
 	{
