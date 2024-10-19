@@ -27,6 +27,11 @@ const usersSchema = new Schema(
 			unique: true,
 			required: true,
 		},
+		_id: {
+			type: Schema.Types.ObjectId,
+			ref: "users",
+			required: false,
+		},
 		password: {
 			type: String,
 			required: true,

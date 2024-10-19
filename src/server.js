@@ -12,6 +12,7 @@ import userRouter from './routers/users.js';
 const PORT = Number(env('PORT', '3000'));
 
 export const startServer = () => {
+
 	const app = express();
 
 	app.use(express.json());
@@ -25,7 +26,7 @@ export const startServer = () => {
 	// 	}),
 	// );
 	app.use('/auth', authRouter);
-	app.use('/user', userRouter);
+	app.use('/users', userRouter);
 	app.use('/water', waterRouter);
 
 	app.use('/uploads', express.static(UPLOAD_DIR));
@@ -42,6 +43,7 @@ export const startServer = () => {
 			error: err.message,
 		});
 	});
+
 
 	app.listen(PORT, () => {
 		console.log(`Server is running on port ${PORT}`);

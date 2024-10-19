@@ -12,15 +12,14 @@ import authenticate from '../middlewares/authenticate.js';
 
 const userRouter = Router();
 
-userRouter.use('/', authenticate);
+userRouter.use(authenticate);
 
 // Отримати інформацію про користувача
-userRouter.get('/:userID', authenticate, ctrlWrapper(getUserInfoController));
+userRouter.get('/', ctrlWrapper(getUserInfoController));
 
 // Додати/змінити фото користувача
 userRouter.post(
 	'/:userID/photo',
-	authenticate,
 	upload.single('photo'),
 	ctrlWrapper(addUserPhotoController),
 );
@@ -28,7 +27,6 @@ userRouter.post(
 // Оновити інформацію про користувача
 userRouter.patch(
 	'/:userID',
-	authenticate,
 	//   jsonParser,
 	validateBody(updateUserSchema),
 	ctrlWrapper(patchUserController),

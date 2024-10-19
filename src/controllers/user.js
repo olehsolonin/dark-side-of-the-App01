@@ -4,11 +4,12 @@ import { deleteFileFromCloudinary } from '../utils/deleteFileFromCloudinary.js';
 
 // Получение информации о пользователе
 export const getUserInfoController = async (req, res) => {
-	const user = await getUser(req.user._id);
+	// const user = await getUser(req.user._id);
+	// console.log(user);
 	res.status(200).json({
 		status: 200,
 		message: 'Successfully found a user!',
-		data: user[0],
+		data: req.user,
 	});
 };
 
