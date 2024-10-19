@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
 
-import { usersCollection } from '../bd/models/user.js';
+import { UsersCollection } from '../db/models/users.js';
 
 export const getUser = async (userId) => {
-  const user = await usersCollection.findOne({ _id: userId });
+  const user = await UsersCollection.findOne({ _id: userId });
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
@@ -12,7 +12,7 @@ export const getUser = async (userId) => {
 };
 
 export const addUserPhoto = async (userId, url, options = {}) => {
-  const updatedUser = await usersCollection.findByIdAndUpdate(
+  const updatedUser = await UsersCollection.findByIdAndUpdate(
     { _id: userId },
     { photo: url },
     { new: true, includeResultMetadata: true, ...options },
@@ -24,7 +24,7 @@ export const addUserPhoto = async (userId, url, options = {}) => {
 export const patchUser = async (userId, data, options = {}) => {
   const updateData = { ...data };
   if (data.password) {
-    const user = await usersCollection.findById(userId);
+    const user = await UsersCollection.findById(userId);
     const ifPasswordsEqual = await bcrypt.compare(data.password, user.password);
     if (ifPasswordsEqual)
       throw createHttpError(
@@ -34,7 +34,7 @@ export const patchUser = async (userId, data, options = {}) => {
     const encryptedPassword = await bcrypt.hash(data.password, 10);
     updateData.password = encryptedPassword;
   }
-  const updatedUser = await usersCollection.findByIdAndUpdate(
+  const updatedUser = await UsersCollection.findByIdAndUpdate(
     { _id: userId },
     updateData,
     {

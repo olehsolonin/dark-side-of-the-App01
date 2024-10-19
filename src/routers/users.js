@@ -5,14 +5,14 @@ import {
   getUserInfoController,
   addUserPhotoController,
   patchUserController,
-} from '../controllers/userController.js';
+} from '../controllers/user.js';
 import { updateUserSchema } from '../validation/user.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import { authenticate } from '../middlewares/authenticate.js';
+import authenticate from '../middlewares/authenticate.js';
 
 const userRouter = Router();
 
-// userRouter.use('/', authenticate);
+userRouter.use('/', authenticate);
 
 // Отримати інформацію про користувача
 userRouter.get('/:userID', authenticate, ctrlWrapper(getUserInfoController));
