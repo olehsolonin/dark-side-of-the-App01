@@ -19,7 +19,7 @@ userRouter.get('/', ctrlWrapper(getUserInfoController));
 
 // Додати/змінити фото користувача
 userRouter.post(
-	'/:userID/photo',
+	'/photo',
 	upload.single('photo'),
 	ctrlWrapper(addUserPhotoController),
 );
