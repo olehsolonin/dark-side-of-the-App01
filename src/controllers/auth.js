@@ -47,6 +47,8 @@ export const signinController = async (req, res) => {
 
 export const refreshController = async (req, res) => {
 	const { refreshToken, sessionId } = req.cookies;
+	// console.log(`salam brat ${refreshToken}`);
+	// console.log(`salam brat ${sessionId}`);
 	const session = await authServices.refreshSession({ refreshToken, sessionId });
 
 	setupSession(res, session);
