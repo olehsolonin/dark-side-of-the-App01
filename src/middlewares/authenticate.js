@@ -7,6 +7,7 @@ const authenticate = async (req, res, next) => {
 	console.log("hello");
 	// const {authorization} = req.headers;
 	const authorization = req.get("Authorization");
+	console.log(authorization);
 
 	if (!authorization) {
 		return next(createHttpError(401, "Authorization header not found"));
@@ -27,7 +28,7 @@ const authenticate = async (req, res, next) => {
 	if (new Date() > session.accessTokenValidUntil) {
 		return next(createHttpError(401, "Access token expired"));
 	}
-	console.log(session);
+	// console.log(session);
 
 	const user = await userServices.getUser(session.userId);
 	if (!user) {
@@ -35,7 +36,7 @@ const authenticate = async (req, res, next) => {
 	}
 
 	req.user = user;
-	console.log(user);
+	// console.log(user);
 
 
 	next();
