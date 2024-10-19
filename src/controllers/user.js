@@ -1,6 +1,6 @@
-import { getUser, addUserPhoto, patchUser } from '../services/user.js';
-import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
-import { deleteFileFromCloudinary } from '../utils/deleteFileFromCloudinary.js';
+import { getUser, addUserPhoto, patchUser } from '../services/users.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloundary.js';
+import { deleteFileFromCloudinary } from '../utils/deleteFileFromCloundary.js';
 
 // Получение информации о пользователе
 export const getUserInfoController = async (req, res) => {
