@@ -1,5 +1,5 @@
 // src/server.js
-
+import cookieParser from "cookie-parser";
 import express from 'express';
 // import pino from 'pino-http';
 import cors from 'cors';
@@ -12,10 +12,12 @@ import userRouter from './routers/users.js';
 const PORT = Number(env('PORT', '3000'));
 
 export const startServer = () => {
+
 	const app = express();
 
 	app.use(express.json());
 	app.use(cors());
+	app.use(cookieParser());
 
 	// app.use(
 	// 	pino({
@@ -25,7 +27,7 @@ export const startServer = () => {
 	// 	}),
 	// );
 	app.use('/auth', authRouter);
-	app.use('/user', userRouter);
+	app.use('/users', userRouter);
 	app.use('/water', waterRouter);
 
 	app.use('/uploads', express.static(UPLOAD_DIR));
@@ -42,6 +44,7 @@ export const startServer = () => {
 			error: err.message,
 		});
 	});
+
 
 	app.listen(PORT, () => {
 		console.log(`Server is running on port ${PORT}`);
