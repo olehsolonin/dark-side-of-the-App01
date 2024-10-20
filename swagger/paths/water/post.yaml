@@ -1,0 +1,53 @@
+tags:
+  - Water
+summary: Add an entry about water
+operationId: addWater
+description: 'Add an entry about water intake with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - date
+          - volume
+        properties:
+          date:
+            description: 'Date and time of water intake'
+            type: string
+            example: '2024-10-18T10:20'
+          volume:
+            description: 'The volume of water in ml'
+            type: number
+            min: 1
+            max: 5000
+            example: 250
+          userId:
+            description: 'User id'
+            type: string
+            example: '66f82f51f334d8291ef790e7'
+responses:
+  '201':
+    description: Successfully created an entry
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created an entry!
+            data:
+              type: object
+              $ref: ..\..\components\schemas\water.yaml
+  '401':
+    $ref: '..\..\components\responses\401.yaml'
