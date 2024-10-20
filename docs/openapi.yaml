@@ -1,0 +1,44 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Tracker of Water
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: This is a documentation of Tracker of Water app
+tags:
+  - name: Auth
+    description: Auth operations with user.
+  - name: Users
+    description: Operations with User`s info.
+  - name: Water
+    description: Operations with information about water consumption.
+servers:
+  - url: 'https://nodejs-hw-mongodb-5-u8mz.onrender.com'
+paths:
+  /auth/signup:
+    post:
+      $ref: '../swagger/paths/auth/signup/post.yaml'
+  /auth/signin:
+    post:
+      $ref: '../swagger/paths/auth/signin/post.yaml'
+  /auth/signout:
+    post:
+      $ref: '../swagger/paths/auth/signout/post.yaml'
+  /auth/refresh:
+    post:
+      $ref: '../swagger/paths/auth/refresh/post.yaml'
+  /users/{id}:
+    patch:
+      $ref: '../swagger/paths/users/{id}/patch.yaml'
+  /users:
+    get:
+      $ref: '../swagger/paths/users/get.yaml'
+  /users/photo:
+    post:
+      $ref: '../swagger/paths/users/photo/post.yaml'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

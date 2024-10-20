@@ -1,0 +1,54 @@
+tags:
+  - Auth
+summary: Login to the app
+operationId: userSignin
+description: Login to the app Tracker of Water
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            format: email
+            description: User's email
+            example: yuliyashylina@gmail.com
+          password:
+            type: string
+            format: password
+            description: User's password
+            example: 12345678
+responses:
+  '200':
+    description: Signin successful
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Signin successful!
+            data:
+              type: object
+              properties:
+                user:
+                  $ref: ..\..\..\components\schemas\user.yaml
+                accessToken:
+                  type: string
+                  example: icEbFX95To8Nggtz1sc8QYVKcCZ47IfiHhx1QMK4
+  '401':
+    $ref: ..\..\..\components\responses\401.yaml
+  '500':
+    $ref: '..\..\..\components\responses\500.yaml'
