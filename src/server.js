@@ -1,9 +1,10 @@
-import express from 'express';
-import pino from 'pino-http';
-import cors from 'cors';
-import { swaggerDocs } from './middlewares/swaggerDocs.js';
+// src/server.js
 
-const PORT = 3000;
+import express from 'express';
+// import pino from 'pino-http';
+import cors from 'cors';
+
+const PORT = Number(env('PORT', '3000'));
 
 export const startServer = () => {
   const app = express();
@@ -24,8 +25,6 @@ export const startServer = () => {
       message: 'Hello world!',
     });
   });
-
-  app.use('/api-docs', swaggerDocs());
 
   app.use('*', (req, res, next) => {
     res.status(404).json({

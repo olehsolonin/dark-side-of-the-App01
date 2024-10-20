@@ -1,0 +1,21 @@
+tags:
+  - Water
+summary: Delete an entry
+operationId: deleteWaterEntry
+description: 'Delete a water entry by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '6714324a13969c9151f9123b'
+responses:
+  '204':
+    description: 'The entry was deleted successfully'
+  '404':
+    $ref: '..\..\..\components\responses\404.yaml'
+  '401':
+    $ref: '..\..\..\components\responses\401.yaml'

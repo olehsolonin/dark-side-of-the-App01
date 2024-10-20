@@ -1,0 +1,52 @@
+tags:
+  - Water
+summary: Get a list of entries by day
+operationId: getWaterByDay
+description: 'Get a list of entries for a specific day with this endpoint'
+security:
+  - bearerAuth: []
+parameters:
+  - in: query
+    name: date
+    schema:
+      type: string
+      example: '2024-10-18'
+responses:
+  '200':
+    description: Successfully loaded water enteries per day
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully loaded water per day!
+            data:
+              type: object
+              properties:
+                totalWaterPerDay:
+                  type: number
+                  description: The sum of all water consumed per day
+                  example: 2000
+                percentPerDay:
+                  type: number
+                  description: Fulfillment of the daily norm in percents
+                  example: 60
+                servings:
+                  type: number
+                  description: The number of servings of water per day
+                  example: 5
+                data:
+                  type: array
+                  items:
+                    $ref: '..\..\components\schemas\water.yaml'
+  '401':
+    $ref: '..\..\components\responses\401.yaml'
