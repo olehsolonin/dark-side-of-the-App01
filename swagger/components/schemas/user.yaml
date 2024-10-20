@@ -1,0 +1,52 @@
+type: object
+required:
+  - email
+  - password
+properties:
+  _id:
+    description: "User's id"
+    type: string
+    example: '6714db356469cbb50dea4595'
+  name:
+    description: "User's name"
+    type: string
+    example: 'Yuliya Shylina'
+  email:
+    description: "User's email"
+    type: string
+    example: 'yuliyashylina@gmail.com'
+  password:
+    description: "User's password"
+    type: string
+    example: '12345678'
+  gender:
+    description: "User's gender"
+    type: string
+    default: 'female'
+    example: 'female'
+  dailyWaterIntake:
+    type: number
+    description: "User's daily rate of water"
+    default: 1800
+  dailyNorm:
+    type: number
+    description: "User's daily norm of water"
+    default: 1800
+  photo:
+    description: "User's photo"
+    type: string
+    example: 'https://res.cloudinary.com/dw85wbzsg/image/upload/v1729423562/wvbc95awdglynpkomie9.jpg'
+  createdAt:
+    description: 'Document creation time'
+    type: string
+    format: date-time
+    example: '2024-10-19T12:13:27.086Z'
+  updatedAt:
+    description: 'Document update time'
+    type: string
+    format: date-time
+    example: '2024-10-20T09:47:22.339Z'
+  # weight:
+  #   description: "User's weight in kilograms"
+  #   type: number
+  #   example: 80

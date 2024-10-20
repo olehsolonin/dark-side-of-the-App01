@@ -1,0 +1,12 @@
+tags:
+  - Auth
+summary: User signout
+operationId: userSignout
+description: User signout from the app Tracker of Water
+security:
+  - bearerAuth: []
+responses:
+  '204':
+    description: Successful signout
+  '401':
+    $ref: ..\..\..\components\responses\401.yaml
