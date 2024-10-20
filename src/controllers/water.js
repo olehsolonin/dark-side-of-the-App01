@@ -45,33 +45,31 @@ export const patchWaterController = async (req, res, next) => {
 };
 
 export const getWaterByDayController = async (req, res) => {
-  const { _id: userId, dailyWaterIntake } = req.user; //the name of the value should be changed
+  const { _id: userId, dailyNorm } = req.user; 
   const { date } = req.query;
-
-  const waterByDay = await waterServices.getWaterByDay(date, userId);
-  const totalWaterPerDay = waterByDay.reduce((acc, value) => acc + value.volume, 0);
-  const percentPerDay = Math.round((totalWaterPerDay > dailyWaterIntake)
+  const data = await waterServices.getWaterByDay(date, userId);
+  const totalWaterPerDay = data.reduce((acc, value) => acc + value.volume, 0);
+  const percentPerDay = Math.round((totalWaterPerDay > dailyNorm)
     ? 100
-    : (totalWaterPerDay / dailyWaterIntake * 100));
+    : (totalWaterPerDay / dailyNorm * 100));
 
 
   res.status(200).json({
     status: 200,
     message: 'Successfully got water per day',
-    data: { totalWaterPerDay, percentPerDay, waterByDay, userId: req._id },
+    data: { totalWaterPerDay, percentPerDay, servings: data.length, data, userId: req._id },
   });
 };
 
 export const getWaterByMonthController = async (req, res) => {
-  const { _id: userId, dailyWaterIntake } = req.user; //the name of the value should be changed
+  const { _id: userId, dailyNorm } = req.user; 
   const { date } = req.query;
-
-  const waterByMonth = await waterServices.getWaterByMonth(date, dailyWaterIntake, userId);
+  const waterByMonth = await waterServices.getWaterByMonth(date, dailyNorm, userId);
 
   res.status(200).json({
     status: 200,
     message: 'Successfully got water per month',
-    data: { waterByMonth, userId: req._id },
+    data: { dailyNorm, ...waterByMonth, userId: req._id },
   });
 };
 
