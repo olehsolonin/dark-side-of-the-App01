@@ -1,23 +1,24 @@
 // src/db/models/student.js 
 
 import { model, Schema } from 'mongoose';
+import { handleSaveError, setUpdateOptions } from "./hooks.js";
 
 const usersSchema = new Schema(
 	{
 		name: {
 			type: String,
-			required: true,
+			required: false,
 			default: 'user'
 		},
-		dailyWaterIntake: {
+		dailyNorm: {
 			type: Number,
 			required: false,
 			default: 1800
 		},
 		gender: {
 			type: String,
-			enum: ['male', 'female', ''],
-			default: 'female',
+			enum: ['Man', 'Woman', 'transformer'],
+			default: 'Woman',
 			required: false
 		},
 		email: {
@@ -34,14 +35,6 @@ const usersSchema = new Schema(
 			type: String,
 			required: false,
 			default: ''
-		},
-		weight: {
-			type: Number,
-			required: false,
-		},
-		activity: {
-			type: Number,
-			required: false,
 		}
 	},
 	{
@@ -49,6 +42,12 @@ const usersSchema = new Schema(
 		versionKey: false,
 	},
 );
+
+usersSchema.post("save", handleSaveError);
+
+usersSchema.pre("findOneAndUpdate", setUpdateOptions);
+
+usersSchema.post("findOneAndUpdate", handleSaveError);
 
 export const UsersCollection = model('user', usersSchema);
 
