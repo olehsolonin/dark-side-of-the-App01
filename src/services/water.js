@@ -30,6 +30,40 @@ export const patchWater = async (id, data, options = {}) => {
   });
 };
 
-export const getWaterByMonth = async ( date, dailyWaterIntake, userId ) => {
+export const getWaterByMonth = async (date, dailyNorm, userId) => {
+  const [year, month] = date.split('-');
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const lastDayOfMonth = daysInMonth.toString();
+
+   const stages = [
+    {
+      $match: {
+        userId,
+        date: {
+          $gte: `${date}-01T00:00:00`,
+          $lt: `${date}-${lastDayOfMonth}T23:59:59`
+        }
+      }
+    },
+    {
+      $group: {
+        _id: {$substr: ["$date", 0, 10]},
+        totalVolume: { $sum: '$volume' },
+        servings: { $count: { } },
+        percent: { $sum: 0 }
+      }
+    },
+    {
+      $sort: { _id: 1 }
+    }
+  ];
+  const data = await WaterCollection.aggregate(stages);
   
+  data.forEach(water => {
+    water.percent = Math.round((water.totalVolume > dailyNorm)
+    ? 100
+    : (water.totalVolume / dailyNorm * 100));
+  });
+
+  return data;
 };
