@@ -548,6 +548,396 @@
           }
         }
       }
+    },
+    "/water/{id}": {
+      "delete": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Delete an entry",
+        "operationId": "deleteWaterEntry",
+        "description": "Delete a water entry by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6714324a13969c9151f9123b"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The entry was deleted successfully"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Update an entry",
+        "operationId": "updateEntry",
+        "description": "Update a water entry by id with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6714324a13969c9151f9123b"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "description": "Date and time of water intake",
+                    "type": "string",
+                    "example": "2024-10-18T10:20"
+                  },
+                  "volume": {
+                    "description": "The volume of water in ml",
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5000,
+                    "example": 250
+                  },
+                  "userId": {
+                    "description": "User id",
+                    "type": "string",
+                    "example": "66f82f51f334d8291ef790e7"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The entry was updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfuly updated en entry!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/water"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
+    },
+    "/water/day": {
+      "get": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Get a list of entries by day",
+        "operationId": "getWaterByDay",
+        "description": "Get a list of entries for a specific day with this endpoint",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "date",
+            "schema": {
+              "type": "string",
+              "example": "2024-10-18"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully loaded water enteries per day",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully loaded water per day!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "totalWaterPerDay": {
+                          "type": "number",
+                          "description": "The sum of all water consumed per day",
+                          "example": 2000
+                        },
+                        "percentPerDay": {
+                          "type": "number",
+                          "description": "Fulfillment of the daily norm in percents",
+                          "example": 60
+                        },
+                        "servings": {
+                          "type": "number",
+                          "description": "The number of servings of water per day",
+                          "example": 5
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/water"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/water/month": {
+      "get": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Get a list of entries by month",
+        "operationId": "getWaterByMonth",
+        "description": "Get a list of entries for a specific month with this endpoint",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "date",
+            "schema": {
+              "type": "string",
+              "example": "2024-10"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully loaded water enteries per month",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully loaded water per month!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "dailyNorm": {
+                          "type": "number",
+                          "description": "Daily water norm for a specific user in ml",
+                          "minimum": 1,
+                          "maximum": 5000,
+                          "example": 1800
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "_id",
+                              "totalVolume",
+                              "servings",
+                              "percent"
+                            ],
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "format": "date",
+                                "example": "2024-10-18"
+                              },
+                              "totalVolume": {
+                                "type": "number",
+                                "description": "The sum of all water consumed per day",
+                                "example": 2000
+                              },
+                              "servings": {
+                                "type": "number",
+                                "description": "The number of servings of water per day",
+                                "example": 5
+                              },
+                              "percent": {
+                                "type": "number",
+                                "description": "Fulfillment of the daily norm in percents",
+                                "example": 60
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/water": {
+      "post": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Add an entry about water",
+        "operationId": "addWater",
+        "description": "Add an entry about water intake with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "date",
+                  "volume"
+                ],
+                "properties": {
+                  "date": {
+                    "description": "Date and time of water intake",
+                    "type": "string",
+                    "example": "2024-10-18T10:20"
+                  },
+                  "volume": {
+                    "description": "The volume of water in ml",
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5000,
+                    "example": 250
+                  },
+                  "userId": {
+                    "description": "User id",
+                    "type": "string",
+                    "example": "66f82f51f334d8291ef790e7"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created an entry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created an entry!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/water"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -617,6 +1007,39 @@
             "type": "string",
             "format": "date-time",
             "example": "2024-10-20T09:47:22.339Z"
+          }
+        }
+      },
+      "water": {
+        "type": "object",
+        "required": [
+          "date",
+          "volume",
+          "userId"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Entry id",
+            "type": "string",
+            "example": "6714324a13969c9151f9123b"
+          },
+          "date": {
+            "type": "string",
+            "format": "YYYY-MM-DDTHH:MM",
+            "description": "Date and time in the format YYYY-MM-DDTHH:MM. Time is in the 24-hour notation",
+            "example": "2024-10-18T14:20"
+          },
+          "volume": {
+            "type": "number",
+            "description": "The volume of water intake in ml",
+            "minimum": 1,
+            "maximum": 5000,
+            "example": 250
+          },
+          "userId": {
+            "description": "User id",
+            "type": "string",
+            "example": "66f82f51f334d8291ef790e7"
           }
         }
       }

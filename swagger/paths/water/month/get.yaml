@@ -35,8 +35,8 @@ responses:
                 dailyNorm:
                   type: number
                   description: Daily water norm for a specific user in ml
-                  min: 1
-                  max: 15000
+                  minimum: 1
+                  maximum: 5000
                   example: 1800
                 data:
                   type: array
@@ -65,4 +65,4 @@ responses:
                         description: Fulfillment of the daily norm in percents
                         example: 60
   '401':
-    $ref: '..\..\components\responses\401.yaml'
+    $ref: ..\..\..\components\responses\401.yaml
