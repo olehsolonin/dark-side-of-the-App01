@@ -801,7 +801,7 @@
                       "type": "string",
                       "example": "Successfully loaded water per month!"
                     },
-                    "data": {
+                    "waterData": {
                       "type": "object",
                       "properties": {
                         "dailyNorm": {

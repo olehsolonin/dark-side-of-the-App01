@@ -69,7 +69,7 @@ export const getWaterByMonthController = async (req, res) => {
   res.status(200).json({
     status: 200,
     message: 'Successfully got water per month',
-    data: { dailyNorm, ...waterByMonth, userId: req._id },
+    data: { dailyNorm, waterData: waterByMonth, userId: req._id },
   });
 };
 
