@@ -29,7 +29,7 @@ responses:
             message:
               type: string
               example: Successfully loaded water per month!
-            data:
+            waterData:
               type: object
               properties:
                 dailyNorm:
@@ -63,6 +63,6 @@ responses:
                       percent:
                         type: number
                         description: Fulfillment of the daily norm in percents
-                        example: 60
+                        example: 100
   '401':
     $ref: ..\..\..\components\responses\401.yaml

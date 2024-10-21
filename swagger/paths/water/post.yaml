@@ -24,10 +24,6 @@ requestBody:
             minimum: 1
             maximum: 5000
             example: 250
-          userId:
-            description: 'User id'
-            type: string
-            example: '66f82f51f334d8291ef790e7'
 responses:
   '201':
     description: Successfully created an entry
