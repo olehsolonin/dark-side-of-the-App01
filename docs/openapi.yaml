@@ -14,7 +14,7 @@ tags:
   - name: Water
     description: Operations with information about water consumption.
 servers:
-  - url: 'https://nodejs-hw-mongodb-5-u8mz.onrender.com'
+  - url: 'https://dark-side-of-the-app01.onrender.com'
 paths:
   /auth/signup:
     post:
