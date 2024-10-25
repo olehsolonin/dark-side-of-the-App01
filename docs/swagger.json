@@ -362,12 +362,12 @@
           }
         }
       },
-      "post": {
+      "patch": {
         "tags": [
           "Users"
         ],
         "summary": "Update user info",
-        "operationId": "post",
+        "operationId": "patch",
         "description": "Update user info. Only include fields in the request body that you want to change.",
         "security": [
           {
@@ -475,7 +475,13 @@
           "content": {
             "multipart/form-data": {
               "schema": {
-                "type": "object"
+                "type": "object",
+                "properties": {
+                  "photo": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
               }
             }
           }
@@ -1051,12 +1057,12 @@
           "name": {
             "description": "User's name",
             "type": "string",
-            "example": "user"
+            "example": "Yuliya Shylina"
           },
           "email": {
             "description": "User's email",
             "type": "string",
-            "example": "street@mail.com"
+            "example": "yuliyashylina@gmail.com"
           },
           "password": {
             "description": "User's password",
@@ -1081,7 +1087,7 @@
           "photo": {
             "description": "User's photo",
             "type": "string",
-            "example": ""
+            "example": "https://res.cloudinary.com/dw85wbzsg/image/upload/v1729423562/wvbc95awdglynpkomie9.jpg"
           },
           "createdAt": {
             "description": "Document creation time",

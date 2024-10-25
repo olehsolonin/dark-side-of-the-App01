@@ -1,7 +1,7 @@
 tags:
   - Users
 summary: Update user info
-operationId: post
+operationId: patch
 description: Update user info. Only include fields in the request body that you
   want to change.
 security:
