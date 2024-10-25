@@ -28,12 +28,11 @@ paths:
   /auth/refresh:
     post:
       $ref: '../swagger/paths/auth/refresh/post.yaml'
-  /users/{id}:
-    patch:
-      $ref: '../swagger/paths/users/{id}/patch.yaml'
   /users:
     get:
       $ref: '../swagger/paths/users/get.yaml'
+    patch:
+      $ref: '../swagger/paths/users/patch.yaml'
   /users/photo:
     post:
       $ref: '../swagger/paths/users/photo/post.yaml'

@@ -1,7 +1,7 @@
 tags:
   - Auth
 summary: Refresh the authentication token
-operationId: refreshToken
+operationId: refresh
 description: Refresh the authentication token
 security:
   - bearerAuth: []

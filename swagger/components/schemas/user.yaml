@@ -4,9 +4,9 @@ required:
   - password
 properties:
   _id:
-    description: "User's id"
     type: string
-    example: '6714db356469cbb50dea4595'
+    description: "User's id"
+    example: '671a9983a4d996aa0ceb1815'
   name:
     description: "User's name"
     type: string
@@ -22,16 +22,15 @@ properties:
   gender:
     description: "User's gender"
     type: string
-    default: 'female'
-    example: 'female'
+    example: 'Woman'
   dailyWaterIntake:
     type: number
-    description: "User's daily rate of water"
-    default: 1800
+    description: "User's daily water intake"
+    example: 700
   dailyNorm:
     type: number
-    description: "User's daily norm of water"
-    default: 1800
+    description: "User's daily norm of water in ml"
+    example: 1800
   photo:
     description: "User's photo"
     type: string
@@ -40,13 +39,9 @@ properties:
     description: 'Document creation time'
     type: string
     format: date-time
-    example: '2024-10-19T12:13:27.086Z'
+    example: '2024-10-24T19:01:24.049Z'
   updatedAt:
     description: 'Document update time'
     type: string
     format: date-time
-    example: '2024-10-20T09:47:22.339Z'
-  # weight:
-  #   description: "User's weight in kilograms"
-  #   type: number
-  #   example: 80
+    example: '2024-10-24T19:01:24.049Z'

@@ -2,7 +2,7 @@ tags:
   - Users
 summary: Update user photo
 description: Update user photo
-operationId: addUserPhoto
+operationId: photo
 security:
   - bearerAuth: []
 requestBody:
@@ -11,11 +11,15 @@ requestBody:
     multipart/form-data:
       schema:
         type: object
+        properties:
+          photo:
+            type: string
+            format: binary
 responses:
   '200':
-    description: User`s photo updated successfully
+    description: 'Photo has been added successfully'
     content:
-      multipart/form-data:
+      application/json:
         schema:
           type: object
           required:
@@ -28,12 +32,10 @@ responses:
               example: 200
             message:
               type: string
-              example: User`s photo updated successfully!
+              example: 'Photo has been added successfully'
             data:
               type: object
-              properties:
-                user:
-                  $ref: ..\..\..\components\schemas\user.yaml
+              example: {}
   '400':
     $ref: ..\..\..\components\responses\400.yaml
   '401':

@@ -1,7 +1,7 @@
 tags:
   - Auth
 summary: Register user to the app
-operationId: userSignup
+operationId: signup
 description: Register user to the app Tracker of Water
 security:
   - bearerAuth: []
@@ -23,8 +23,8 @@ requestBody:
             description: User's password
             example: 12345678
 responses:
-  '200':
-    description: Register user successful
+  '201':
+    description: Successfully registered user
     content:
       application/json:
         schema:
@@ -36,18 +36,51 @@ responses:
           properties:
             status:
               type: integer
-              example: 200
+              example: 201
             message:
               type: string
-              example: Register user successful!
+              example: Successfully registered user!
             data:
               type: object
               properties:
-                user:
-                  $ref: ..\..\..\components\schemas\user.yaml
-                accessToken:
+                name:
                   type: string
-                  example: icEbFX95To8Nggtz1sc8QYVKcCZ47IfiHhx1QMK4
+                  description: "User's name"
+                  example: 'user'
+                dailyNorm:
+                  type: number
+                  description: "User's daily norm of water"
+                  example: 1800
+                dailyWaterIntake:
+                  type: number
+                  description: "User's daily water intake"
+                  example: 500
+                gender:
+                  type: string
+                  description: "User's gender"
+                  example: 'Woman'
+                email:
+                  type: string
+                  description: "User's email"
+                  example: 'street@mail.com'
+                photo:
+                  type: string
+                  description: "User's photo"
+                  example: ''
+                _id:
+                  type: string
+                  description: "User's ID"
+                  example: '671a9983a4d996aa0ceb1815'
+                createdAt:
+                  type: string
+                  format: date-time
+                  description: 'Document creation time'
+                  example: '2024-10-24T19:01:24.049Z'
+                updatedAt:
+                  type: string
+                  format: date-time
+                  description: 'Document update time'
+                  example: '2024-10-24T19:01:24.049Z'
   '409':
     $ref: ..\..\..\components\responses\409.yaml
   '500':
