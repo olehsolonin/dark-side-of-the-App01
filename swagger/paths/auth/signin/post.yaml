@@ -1,7 +1,7 @@
 tags:
   - Auth
 summary: Login to the app
-operationId: userSignin
+operationId: signin
 description: Login to the app Tracker of Water
 security:
   - bearerAuth: []
@@ -43,8 +43,6 @@ responses:
             data:
               type: object
               properties:
-                user:
-                  $ref: ..\..\..\components\schemas\user.yaml
                 accessToken:
                   type: string
                   example: icEbFX95To8Nggtz1sc8QYVKcCZ47IfiHhx1QMK4

@@ -1,0 +1,65 @@
+tags:
+  - Users
+summary: Update user info
+operationId: post
+description: Update user info. Only include fields in the request body that you
+  want to change.
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            description: User's name
+            type: string
+            example: Yuliya Shylina
+          email:
+            description: User's email
+            type: string
+            example: yuliyashylina@gmail.com
+          password:
+            description: User's password
+            type: string
+            example: '12345678'
+          gender:
+            description: User's gender
+            type: string
+            example: Woman
+          dailyWaterIntake:
+            type: number
+            description: User's daily rate of water
+            example: 1900
+        additionalProperties: false
+responses:
+  '200':
+    description: User info updated successfully!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: User info updated successfully!
+            data:
+              type: object
+              $ref: ../../components/schemas/user.yaml
+  '400':
+    $ref: ..\..\components\responses\400.yaml
+  '401':
+    $ref: ..\..\components\responses\401.yaml
+  '404':
+    $ref: ..\..\components\responses\404.yaml
+  '500':
+    $ref: ..\..\components\responses\500.yaml

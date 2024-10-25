@@ -35,7 +35,7 @@
           "Auth"
         ],
         "summary": "Register user to the app",
-        "operationId": "userSignup",
+        "operationId": "signup",
         "description": "Register user to the app Tracker of Water",
         "security": [
           {
@@ -67,8 +67,8 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Register user successful",
+          "201": {
+            "description": "Successfully registered user",
             "content": {
               "application/json": {
                 "schema": {
@@ -81,21 +81,61 @@
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 200
+                      "example": 201
                     },
                     "message": {
                       "type": "string",
-                      "example": "Register user successful!"
+                      "example": "Successfully registered user!"
                     },
                     "data": {
                       "type": "object",
                       "properties": {
-                        "user": {
-                          "$ref": "#/components/schemas/user"
-                        },
-                        "accessToken": {
+                        "name": {
                           "type": "string",
-                          "example": "icEbFX95To8Nggtz1sc8QYVKcCZ47IfiHhx1QMK4"
+                          "description": "User's name",
+                          "example": "user"
+                        },
+                        "dailyNorm": {
+                          "type": "number",
+                          "description": "User's daily norm of water",
+                          "example": 1800
+                        },
+                        "dailyWaterIntake": {
+                          "type": "number",
+                          "description": "User's daily water intake",
+                          "example": 500
+                        },
+                        "gender": {
+                          "type": "string",
+                          "description": "User's gender",
+                          "example": "Woman"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "User's email",
+                          "example": "street@mail.com"
+                        },
+                        "photo": {
+                          "type": "string",
+                          "description": "User's photo",
+                          "example": ""
+                        },
+                        "_id": {
+                          "type": "string",
+                          "description": "User's ID",
+                          "example": "671a9983a4d996aa0ceb1815"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Document creation time",
+                          "example": "2024-10-24T19:01:24.049Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Document update time",
+                          "example": "2024-10-24T19:01:24.049Z"
                         }
                       }
                     }
@@ -119,7 +159,7 @@
           "Auth"
         ],
         "summary": "Login to the app",
-        "operationId": "userSignin",
+        "operationId": "signin",
         "description": "Login to the app Tracker of Water",
         "security": [
           {
@@ -174,9 +214,6 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "user": {
-                          "$ref": "#/components/schemas/user"
-                        },
                         "accessToken": {
                           "type": "string",
                           "example": "icEbFX95To8Nggtz1sc8QYVKcCZ47IfiHhx1QMK4"
@@ -203,7 +240,7 @@
           "Auth"
         ],
         "summary": "User signout",
-        "operationId": "userSignout",
+        "operationId": "signout",
         "description": "User signout from the app Tracker of Water",
         "security": [
           {
@@ -229,7 +266,7 @@
           "Auth"
         ],
         "summary": "Refresh the authentication token",
-        "operationId": "refreshToken",
+        "operationId": "refresh",
         "description": "Refresh the authentication token",
         "security": [
           {
@@ -280,29 +317,61 @@
         }
       }
     },
-    "/users/{id}": {
-      "patch": {
+    "/users": {
+      "get": {
         "tags": [
           "Users"
         ],
-        "summary": "Update user info by ID",
-        "operationId": "patchUser",
-        "description": "Update user info by ID",
+        "summary": "Get user's info",
+        "description": "Get information about a user",
+        "operationId": "get",
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "parameters": [
+        "responses": {
+          "200": {
+            "description": "Successfully found a user!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found a user!"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update user info",
+        "operationId": "post",
+        "description": "Update user info. Only include fields in the request body that you want to change.",
+        "security": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the user to update",
-            "example": "60d21b4667d0d8992e610c85"
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -337,7 +406,8 @@
                     "description": "User's daily rate of water",
                     "example": 1900
                   }
-                }
+                },
+                "additionalProperties": false
               }
             }
           }
@@ -387,96 +457,6 @@
         }
       }
     },
-    "/users": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get user's info",
-        "description": "Get information about user",
-        "operationId": "getUserInfo",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully found a user!",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully found a user!"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "user": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "description": "User's ID",
-                              "example": "6714db356469cbb50dea4595"
-                            },
-                            "name": {
-                              "type": "string",
-                              "description": "User's full name",
-                              "example": "Yuliya Shylina"
-                            },
-                            "email": {
-                              "type": "string",
-                              "format": "email",
-                              "description": "User's email address",
-                              "example": "yuliyashylina@gmail.com"
-                            },
-                            "gender": {
-                              "type": "string",
-                              "description": "User's gender",
-                              "example": "Woman"
-                            },
-                            "dailyNorm": {
-                              "type": "number",
-                              "description": "User's daily norm of water",
-                              "default": 2000
-                            },
-                            "dailyWaterIntake": {
-                              "type": "number",
-                              "description": "User's daily rate of water",
-                              "default": 2000
-                            },
-                            "photo": {
-                              "type": "string",
-                              "format": "uri",
-                              "description": "URL of the user's photo photo",
-                              "example": "https://res.cloudinary.com/dw85wbzsg/image/upload/v1729423562/wvbc95awdglynpkomie9.jpg"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          }
-        }
-      }
-    },
     "/users/photo": {
       "post": {
         "tags": [
@@ -484,7 +464,7 @@
         ],
         "summary": "Update user photo",
         "description": "Update user photo",
-        "operationId": "addUserPhoto",
+        "operationId": "photo",
         "security": [
           {
             "bearerAuth": []
@@ -502,9 +482,9 @@
         },
         "responses": {
           "200": {
-            "description": "User`s photo updated successfully",
+            "description": "Photo has been added successfully",
             "content": {
-              "multipart/form-data": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "required": [
@@ -519,15 +499,11 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "User`s photo updated successfully!"
+                      "example": "Photo has been added successfully"
                     },
                     "data": {
                       "type": "object",
-                      "properties": {
-                        "user": {
-                          "$ref": "#/components/schemas/user"
-                        }
-                      }
+                      "example": {}
                     }
                   }
                 }
@@ -937,103 +913,6 @@
         "scheme": "bearer"
       }
     },
-    "schemas": {
-      "user": {
-        "type": "object",
-        "required": [
-          "email",
-          "password"
-        ],
-        "properties": {
-          "_id": {
-            "description": "User's id",
-            "type": "string",
-            "example": "6714db356469cbb50dea4595"
-          },
-          "name": {
-            "description": "User's name",
-            "type": "string",
-            "example": "Yuliya Shylina"
-          },
-          "email": {
-            "description": "User's email",
-            "type": "string",
-            "example": "yuliyashylina@gmail.com"
-          },
-          "password": {
-            "description": "User's password",
-            "type": "string",
-            "example": "12345678"
-          },
-          "gender": {
-            "description": "User's gender",
-            "type": "string",
-            "default": "female",
-            "example": "female"
-          },
-          "dailyWaterIntake": {
-            "type": "number",
-            "description": "User's daily rate of water",
-            "default": 1800
-          },
-          "dailyNorm": {
-            "type": "number",
-            "description": "User's daily norm of water",
-            "default": 1800
-          },
-          "photo": {
-            "description": "User's photo",
-            "type": "string",
-            "example": "https://res.cloudinary.com/dw85wbzsg/image/upload/v1729423562/wvbc95awdglynpkomie9.jpg"
-          },
-          "createdAt": {
-            "description": "Document creation time",
-            "type": "string",
-            "format": "date-time",
-            "example": "2024-10-19T12:13:27.086Z"
-          },
-          "updatedAt": {
-            "description": "Document update time",
-            "type": "string",
-            "format": "date-time",
-            "example": "2024-10-20T09:47:22.339Z"
-          }
-        }
-      },
-      "water": {
-        "type": "object",
-        "required": [
-          "date",
-          "volume",
-          "userId"
-        ],
-        "properties": {
-          "_id": {
-            "description": "Entry id",
-            "type": "string",
-            "example": "6714324a13969c9151f9123b"
-          },
-          "date": {
-            "type": "string",
-            "format": "YYYY-MM-DDTHH:MM",
-            "description": "Date and time in the format YYYY-MM-DDTHH:MM. Time is in the 24-hour notation",
-            "example": "2024-10-18T14:20"
-          },
-          "volume": {
-            "type": "number",
-            "description": "The volume of water intake in ml",
-            "minimum": 1,
-            "maximum": 5000,
-            "example": 250
-          },
-          "userId": {
-            "description": "User id",
-            "type": "string",
-            "example": "66f82f51f334d8291ef790e7"
-          }
-        }
-      }
-    },
     "responses": {
       "400": {
         "description": "New password cannot be the same as the old password",
@@ -1152,6 +1031,102 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "user": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User's id",
+            "example": "671a9983a4d996aa0ceb1815"
+          },
+          "name": {
+            "description": "User's name",
+            "type": "string",
+            "example": "user"
+          },
+          "email": {
+            "description": "User's email",
+            "type": "string",
+            "example": "street@mail.com"
+          },
+          "password": {
+            "description": "User's password",
+            "type": "string",
+            "example": "12345678"
+          },
+          "gender": {
+            "description": "User's gender",
+            "type": "string",
+            "example": "Woman"
+          },
+          "dailyWaterIntake": {
+            "type": "number",
+            "description": "User's daily water intake",
+            "example": 700
+          },
+          "dailyNorm": {
+            "type": "number",
+            "description": "User's daily norm of water in ml",
+            "example": 1800
+          },
+          "photo": {
+            "description": "User's photo",
+            "type": "string",
+            "example": ""
+          },
+          "createdAt": {
+            "description": "Document creation time",
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-10-24T19:01:24.049Z"
+          },
+          "updatedAt": {
+            "description": "Document update time",
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-10-24T19:01:24.049Z"
+          }
+        }
+      },
+      "water": {
+        "type": "object",
+        "required": [
+          "date",
+          "volume",
+          "userId"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Entry id",
+            "type": "string",
+            "example": "6714324a13969c9151f9123b"
+          },
+          "date": {
+            "type": "string",
+            "format": "YYYY-MM-DDTHH:MM",
+            "description": "Date and time in the format YYYY-MM-DDTHH:MM. Time is in the 24-hour notation",
+            "example": "2024-10-18T14:20"
+          },
+          "volume": {
+            "type": "number",
+            "description": "The volume of water intake in ml",
+            "minimum": 1,
+            "maximum": 5000,
+            "example": 250
+          },
+          "userId": {
+            "description": "User id",
+            "type": "string",
+            "example": "66f82f51f334d8291ef790e7"
           }
         }
       }
