@@ -25,7 +25,7 @@ userRouter.post(
 );
 
 // Оновити інформацію про користувача
-userRouter.post(
+userRouter.patch(
   '/',
   //   jsonParser,
   validateBody(updateUserSchema),
