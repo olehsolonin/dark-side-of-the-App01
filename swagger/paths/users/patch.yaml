@@ -29,10 +29,6 @@ requestBody:
             description: User's gender
             type: string
             example: Woman
-          dailyWaterIntake:
-            type: number
-            description: User's daily rate of water
-            example: 1900
         additionalProperties: false
 responses:
   '200':
