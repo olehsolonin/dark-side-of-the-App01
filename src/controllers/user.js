@@ -9,7 +9,17 @@ export const getUserInfoController = async (req, res) => {
 	res.status(200).json({
 		status: 200,
 		message: 'Successfully found a user!',
-		data: req.user,
+		data: {
+			"dailyWaterIntake": req.user.dailyWaterIntake,
+			"_id": req.user._id,
+			"name": req.user.name,
+			"dailyNorm": req.user.dailyNorm,
+			"gender": req.user.gender,
+			"email": req.user.email,
+			"photo": req.user.photo,
+			"createdAt": req.user.createdAt,
+			"updatedAt": req.user.updatedAt
+		},
 	});
 };
 
@@ -31,9 +41,7 @@ export const addUserPhotoController = async (req, res) => {
 
 	if (env('ENABLE_CLOUDINARY') === 'true') {
 		photoUrl = await saveFileToCloudinary(photo);
-	} else {
-		photoUrl = await saveFileToUploadDir(photo);
-	}
+	};
 	const updatedUser = await addUserPhoto(userId, photoUrl);
 
 	res.status(200).json({

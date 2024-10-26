@@ -15,10 +15,6 @@ properties:
     description: "User's email"
     type: string
     example: 'yuliyashylina@gmail.com'
-  password:
-    description: "User's password"
-    type: string
-    example: '12345678'
   gender:
     description: "User's gender"
     type: string
