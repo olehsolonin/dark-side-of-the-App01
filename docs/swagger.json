@@ -266,7 +266,7 @@
           "Auth"
         ],
         "summary": "Refresh the authentication token",
-        "operationId": "refresh",
+        "operationId": "refreshToken",
         "description": "Refresh the authentication token",
         "security": [
           {
@@ -1058,11 +1058,6 @@
             "description": "User's email",
             "type": "string",
             "example": "yuliyashylina@gmail.com"
-          },
-          "password": {
-            "description": "User's password",
-            "type": "string",
-            "example": "12345678"
           },
           "gender": {
             "description": "User's gender",

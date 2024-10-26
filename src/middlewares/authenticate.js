@@ -20,6 +20,7 @@ const authenticate = async (req, res, next) => {
 	}
 
 	const session = await authServices.findSessionByAccessToken(token);
+	// console.log(session);
 
 	if (!session) {
 		return next(createHttpError(401, "Session not found"));
@@ -28,12 +29,14 @@ const authenticate = async (req, res, next) => {
 	if (new Date() > session.accessTokenValidUntil) {
 		return next(createHttpError(401, "Access token expired"));
 	}
-
+	// console.log("Hello");
 
 	const user = await userServices.getUser(session.userId);
 	if (!user) {
 		return next(createHttpError(401, "User not found"));
 	}
+
+	// console.log(user);
 
 	req.user = user;
 
