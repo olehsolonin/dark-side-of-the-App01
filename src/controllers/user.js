@@ -10,7 +10,7 @@ export const getUserInfoController = async (req, res) => {
 		status: 200,
 		message: 'Successfully found a user!',
 		data: {
-			"dailyWaterIntake": req.user.dailyWaterIntake,
+			// "dailyWaterIntake": req.user.dailyWaterIntake,
 			"_id": req.user._id,
 			"name": req.user.name,
 			"dailyNorm": req.user.dailyNorm,
@@ -66,4 +66,25 @@ export const patchUserController = async (req, res) => {
 		message: 'User has been updated successfully',
 		data: updatedUser,
 	});
+};
+
+export const patchDailyNormController = async (req, res, next) => {
+	const userId = req.user._id;
+	const { dailyNorm } = req.body;
+
+	try {
+		const updatedUser = await patchUser(userId, { dailyNorm });
+
+		if (!updatedUser) {
+			return next(createHttpError(404, 'User not found'));
+		}
+
+		res.status(200).json({
+			status: 200,
+			message: "User's daily norm has been updated successfully",
+			data: { dailyNorm },
+		});
+	} catch (error) {
+		next(error);
+	}
 };
