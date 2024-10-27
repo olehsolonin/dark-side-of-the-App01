@@ -18,11 +18,19 @@ export const startServer = () => {
 	const app = express();
 
 	app.use(express.json());
+	// app.use(cors({
+	// origin: ["http://localhost:3000", "https://dark-side-of-the-app01.onrender.com", "http://localhost:5173"],
+	// 	origin: "*",
+	// 	methods: ["GET", "POST", "PATCH", "PUT", "DELETE"]
+	// }));
+	app.options('*', cors());
 	app.use(cors({
-		// origin: ["http://localhost:3000", "https://dark-side-of-the-app01.onrender.com", "http://localhost:5173"],
 		origin: "*",
-		methods: ["GET", "POST", "PATCH", "PUT", "DELETE"]
+		methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+		allowedHeaders: ["Content-Type", "Authorization"], // Добавьте все используемые заголовки
 	}));
+
+
 	app.use(cookieParser());
 
 	// app.use(
