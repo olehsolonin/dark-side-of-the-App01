@@ -19,7 +19,8 @@ export const startServer = () => {
 
 	app.use(express.json());
 	app.use(cors({
-		origin: ["http://localhost:3000", "https://dark-side-of-the-app01.onrender.com", "http://localhost:5173"],
+		// origin: ["http://localhost:3000", "https://dark-side-of-the-app01.onrender.com", "http://localhost:5173"],
+		origin: "*",
 		methods: ["GET", "POST", "PATCH", "PUT", "DELETE"]
 	}));
 	app.use(cookieParser());
