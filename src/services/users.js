@@ -4,9 +4,9 @@ import createHttpError from 'http-errors';
 import { UsersCollection } from '../db/models/users.js';
 
 export const getUser = async (userId) => {
-	console.log(userId);
+	// console.log(userId);
 	const user = await UsersCollection.findById(userId);
-	console.log('user', user);
+	// console.log('user', user);
 
 	if (!user) {
 		throw createHttpError(404, 'User not found');

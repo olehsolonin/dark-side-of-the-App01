@@ -36,6 +36,9 @@ paths:
   /users/photo:
     post:
       $ref: '../swagger/paths/users/photo/post.yaml'
+  /users/norm:
+    patch:
+      $ref: '../swagger/paths/users/norm/patch.yaml'
   /water/{id}:
     delete:
       $ref: '../swagger/paths/water/{id}/delete.yaml'
