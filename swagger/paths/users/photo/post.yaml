@@ -35,7 +35,7 @@ responses:
               example: 'Photo has been added successfully'
             data:
               type: object
-              example: {}
+              example: 'https://res.cloudinary.com/dw85wbzsg/image/upload/v1729423562/wvbc95awdglynpkomie9.jpg'
   '400':
     $ref: ..\..\..\components\responses\400.yaml
   '401':

@@ -14,5 +14,3 @@ content:
         message:
           type: string
           example: New password cannot be the same as the old password
-        data:
-          type: object

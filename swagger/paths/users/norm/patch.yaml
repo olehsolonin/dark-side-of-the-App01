@@ -14,7 +14,7 @@ requestBody:
         properties:
           dailyNorm:
             description: User's dailyNorm
-            type: string
+            type: number
             example: 1900
         additionalProperties: false
 responses:
