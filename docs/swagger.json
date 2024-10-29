@@ -548,8 +548,8 @@
                 "properties": {
                   "dailyNorm": {
                     "description": "User's dailyNorm",
-                    "type": "string",
-                    "example": 1900
+                    "type": "number",
+                    "example": 2000
                   }
                 },
                 "additionalProperties": false
