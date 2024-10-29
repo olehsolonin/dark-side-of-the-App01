@@ -584,7 +584,7 @@
                         "dailyNorm": {
                           "type": "number",
                           "description": "User's daily norm of water",
-                          "example": 1900
+                          "example": 2000
                         }
                       }
                     }

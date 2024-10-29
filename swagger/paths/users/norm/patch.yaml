@@ -41,7 +41,7 @@ responses:
                 dailyNorm:
                   type: number
                   description: "User's daily norm of water"
-                  example: 1900
+                  example: 2000
   '400':
     $ref: ..\..\..\components\responses\400.yaml
   '401':
