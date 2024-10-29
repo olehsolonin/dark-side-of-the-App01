@@ -19,10 +19,6 @@ properties:
     description: "User's gender"
     type: string
     example: 'Woman'
-  dailyWaterIntake:
-    type: number
-    description: "User's daily water intake"
-    example: 700
   dailyNorm:
     type: number
     description: "User's daily norm of water in ml"

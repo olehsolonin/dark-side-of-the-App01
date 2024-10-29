@@ -504,7 +504,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "example": {}
+                      "example": "https://res.cloudinary.com/dw85wbzsg/image/upload/v1729423562/wvbc95awdglynpkomie9.jpg"
                     }
                   }
                 }
@@ -1016,9 +1016,6 @@
                 "message": {
                   "type": "string",
                   "example": "New password cannot be the same as the old password"
-                },
-                "data": {
-                  "type": "object"
                 }
               }
             }
@@ -1145,11 +1142,6 @@
             "description": "User's gender",
             "type": "string",
             "example": "Woman"
-          },
-          "dailyWaterIntake": {
-            "type": "number",
-            "description": "User's daily water intake",
-            "example": 700
           },
           "dailyNorm": {
             "type": "number",
