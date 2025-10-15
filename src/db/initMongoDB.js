@@ -8,11 +8,12 @@ export const initMongoDB = async () => {
 	try {
 		const user = env('MONGODB_USER');
 		const pwd = env('MONGODB_PASSWORD');
-		const url = env('MONGODB_URL');
-		const db = env('MONGODB_DB');
+		// const url = env('MONGODB_URL');
+		// const db = env('MONGODB_DB');
 
 		await mongoose.connect(
-			`mongodb+srv://${user}:${pwd}@${url}/${db}?retryWrites=true&w=majority`,
+			// `mongodb+srv://${user}:${pwd}@${url}/${db}?retryWrites=true&w=majority`,
+			`mongodb+srv://${user}:${pwd}@cluster0.vifed.mongodb.net`,
 		);
 		console.log('Mongo connection successfully established!');
 
@@ -21,3 +22,6 @@ export const initMongoDB = async () => {
 		throw e;
 	}
 };
+
+
+// mongodb+srv://soloninolegos:<db_password>@cluster0.vifed.mongodb.net/
